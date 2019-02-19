@@ -12,6 +12,8 @@ pipelines:
 
       - step:
           name: Create Package
+          caches:
+            - node-global
           script:
             - echo Creating salesforce package
             - npm install --global force-dev-tool
@@ -38,6 +40,8 @@ pipelines:
 
       - step:
           name: Create Package
+          caches:
+            - node-global
           script:
             - echo Creating salesforce package
             - npm install --global force-dev-tool
@@ -64,6 +68,8 @@ pipelines:
 
       - step:
           name: Create Package
+          caches:
+            - node-global
           script:
             - echo Creating salesforce package
             - npm install --global force-dev-tool

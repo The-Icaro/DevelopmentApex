@@ -28,7 +28,7 @@ debug/
 *.iml
 #*.yml
 force.json
-#package.xml
+package.xml
 build.properties
 .vim-force.com/
 \.vscode/

@@ -1,15 +1,14 @@
-# set SF_USERNAME, SF_PASSWORD as environment variables
+# set SF_USERNAME, SF_PASSWORD and $SF_LOGIN_URL as environment variables
 
 image: node:10.15.0
 pipelines:
   branches:
-    master:
+    develop:
       - step:
           name: Show files to Deploy
           script:
             - echo Deploy to UAT
             - git diff HEAD~1 HEAD --no-renames --name-only
-
       - step:
           name: Create Package
           caches:
@@ -24,14 +23,15 @@ pipelines:
           caches:
             - node-global
           name: Deploy to test
-          deployment: production
+          deployment: test
           #trigger: manual
           script:
             - expr $SF_USERNAME
-            - echo Deploy to production
+            - echo Deploy to test
             - npm install --global force-dev-tool
-            - force-dev-tool remote add production $SF_USERNAME $SF_PASSWORD
-            - force-dev-tool deploy -c -t -d config/deployments/feature-merge production
+            - force-dev-tool remote add test $SF_USERNAME $SF_PASSWORD $SF_LOGIN_URL
+            - force-dev-tool deploy -c -t -d config/deployments/feature-merge test
+
 
     release:
       - step:
@@ -60,10 +60,11 @@ pipelines:
             - expr $SF_USERNAME
             - echo Deploy to staging with $SF_USERNAME login
             - npm install --global force-dev-tool
-            - force-dev-tool remote add staging $SF_USERNAME $SF_PASSWORD
+            - force-dev-tool remote add staging $SF_USERNAME $SF_PASSWORD $SF_LOGIN_URL
             - force-dev-tool deploy -c -t -d config/deployments/feature-merge staging
 
-    develop:
+
+    master:
       - step:
           name: Show files to Deploy
           script:
@@ -84,14 +85,14 @@ pipelines:
           caches:
             - node-global
           name: Deploy to test
-          deployment: test
+          deployment: production
           #trigger: manual
           script:
             - expr $SF_USERNAME
-            - echo Deploy to test
+            - echo Deploy to production
             - npm install --global force-dev-tool
-            - force-dev-tool remote add test $SF_USERNAME $SF_PASSWORD
-            - force-dev-tool deploy -c -t -d config/deployments/feature-merge test
+            - force-dev-tool remote add production $SF_USERNAME $SF_PASSWORD $SF_LOGIN_URL
+            - force-dev-tool deploy -c -t -d config/deployments/feature-merge production
 definitions:
   caches:
     node-global: /usr/local/lib/node_modules

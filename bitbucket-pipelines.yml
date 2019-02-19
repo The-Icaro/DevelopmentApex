@@ -27,7 +27,8 @@ pipelines:
           deployment: production
           #trigger: manual
           script:
-            - echo Deploy to production with $SF_USERNAME login
+            - expr $SF_USERNAME
+            - echo Deploy to production
             - npm install --global force-dev-tool
             - force-dev-tool remote add production $SF_USERNAME $SF_PASSWORD
             - force-dev-tool deploy -c -t -d config/deployments/feature-merge production
@@ -36,7 +37,7 @@ pipelines:
       - step:
           name: Show files to Deploy
           script:
-            - echo Deploy to UAT
+            - echo Deploy to Staging environment
             - git diff HEAD~1 HEAD --no-renames --name-only
 
       - step:
@@ -56,6 +57,7 @@ pipelines:
           deployment: staging
           #trigger: manual
           script:
+            - expr $SF_USERNAME
             - echo Deploy to staging with $SF_USERNAME login
             - npm install --global force-dev-tool
             - force-dev-tool remote add staging $SF_USERNAME $SF_PASSWORD
@@ -85,7 +87,8 @@ pipelines:
           deployment: test
           #trigger: manual
           script:
-            - echo Deploy to test with $SF_USERNAME login
+            - expr $SF_USERNAME
+            - echo Deploy to test
             - npm install --global force-dev-tool
             - force-dev-tool remote add test $SF_USERNAME $SF_PASSWORD
             - force-dev-tool deploy -c -t -d config/deployments/feature-merge test

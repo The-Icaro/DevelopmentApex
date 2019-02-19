@@ -27,8 +27,9 @@ pipelines:
           deployment: production
           #trigger: manual
           script:
-            - force-dev-tool remote add production $SF_USERNAME $SF_PASSWORD
             - echo Deploy to production
+            - npm install --global force-dev-tool
+            - force-dev-tool remote add production $SF_USERNAME $SF_PASSWORD
             - force-dev-tool deploy -c -t -d config/deployments/feature-merge production
 
     release:
@@ -55,8 +56,9 @@ pipelines:
           deployment: staging
           #trigger: manual
           script:
-            - force-dev-tool remote add staging $SF_USERNAME $SF_PASSWORD
             - echo Deploy to staging
+            - npm install --global force-dev-tool
+            - force-dev-tool remote add staging $SF_USERNAME $SF_PASSWORD
             - force-dev-tool deploy -c -t -d config/deployments/feature-merge staging
 
     develop:
@@ -83,8 +85,9 @@ pipelines:
           deployment: test
           #trigger: manual
           script:
-            - force-dev-tool remote add test $SF_USERNAME $SF_PASSWORD
             - echo Deploy to test
+            - npm install --global force-dev-tool
+            - force-dev-tool remote add test $SF_USERNAME $SF_PASSWORD
             - force-dev-tool deploy -c -t -d config/deployments/feature-merge test
 
 definitions:

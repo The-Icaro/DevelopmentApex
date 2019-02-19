@@ -24,25 +24,25 @@ Acesse Settings > Pipelines > Deployments.
 Em cada ambiente deverá ser reconfigurado as variáveis
 
 **TEST**
----------------|--------------|
-Variable       | Value        |
----------------|--------------|
-SF_USERNAME    |              |
-SF_PASSWORD    |              |
-$SF_LOGIN_URL  | https://test.salesforce.com |
+|---------------|--------------|
+| Variable      | Value                       |
+|:--------------|:----------------------------|
+| SF_USERNAME   |                             |
+| SF_PASSWORD   |                             |
+| $SF_LOGIN_URL | https://test.salesforce.com |
 
 **Stage**
----------------|--------------|
-Variable       | Value        |
----------------|--------------|
-SF_USERNAME    |              |
-SF_PASSWORD    |              |
-$SF_LOGIN_URL  | https://test.salesforce.com |
+|---------------|--------------|
+| Variable      | Value                       |
+|:--------------|:----------------------------|
+| SF_USERNAME   |                             |
+| SF_PASSWORD   |                             |
+| $SF_LOGIN_URL | https://test.salesforce.com |
 
 **Production**
----------------|------------------------------|
-Variable       | Value                        |
----------------|------------------------------|
-SF_USERNAME    |                              |
-SF_PASSWORD    |                              |
-$SF_LOGIN_URL  | https://login.salesforce.com |
+|---------------|------------------------------|
+| Variable      | Value                        |
+|:--------------|:-----------------------------|
+| SF_USERNAME   |                              |
+| SF_PASSWORD   |                              |
+| $SF_LOGIN_URL | https://login.salesforce.com |

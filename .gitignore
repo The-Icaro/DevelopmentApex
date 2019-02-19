@@ -21,8 +21,8 @@ src/sharingRules
 src/tabs
 src/workflows
 src/documents
-*.sublime-project
 config/
+*.sublime-project
 *.sublime-workspace
 debug/
 *.iml

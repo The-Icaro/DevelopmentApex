@@ -10,28 +10,19 @@ pipelines:
             - echo Deploy to UAT
             - git diff HEAD~1 HEAD --no-renames --name-only
       - step:
-          name: Create Package
+          name: Create Package and Deploy
+          deployment: test
           caches:
             - node-global
           script:
             - echo Creating salesforce package
             - npm install --global force-dev-tool
+            - force-dev-tool remote add test $SF_USERNAME $SF_PASSWORD $SF_LOGIN_URL
             - git diff HEAD~1 HEAD --no-renames | force-dev-tool changeset create feature-merge -f
+            - echo Deploying to salesforce
+            - force-dev-tool deploy -t -d config/deployments/feature-merge test
           artifacts:
             - config/deployments/feature-merge
-      - step:
-          caches:
-            - node-global
-          name: Deploy to test
-          deployment: test
-          #trigger: manual
-          script:
-            - expr $SF_USERNAME
-            - echo Deploy to test
-            - npm install --global force-dev-tool
-            - force-dev-tool remote add test $SF_USERNAME $SF_PASSWORD $SF_LOGIN_URL
-            - force-dev-tool deploy -c -t -d config/deployments/feature-merge test
-
 
     release:
       - step:
@@ -39,60 +30,42 @@ pipelines:
           script:
             - echo Deploy to Staging environment
             - git diff HEAD~1 HEAD --no-renames --name-only
-
       - step:
-          name: Create Package
+          name: Create Package and Deploy
+          deployment: staging
           caches:
             - node-global
           script:
             - echo Creating salesforce package
             - npm install --global force-dev-tool
+            - force-dev-tool remote add staging $SF_USERNAME $SF_PASSWORD $SF_LOGIN_URL
             - git diff HEAD~1 HEAD --no-renames | force-dev-tool changeset create feature-merge -f
+            - echo Deploying to salesforce
+            - force-dev-tool deploy -t -d config/deployments/feature-merge staging
           artifacts:
             - config/deployments/feature-merge
-      - step:
-          caches:
-            - node-global
-          name: Deploy to staging
-          deployment: staging
-          #trigger: manual
-          script:
-            - expr $SF_USERNAME
-            - echo Deploy to staging with $SF_USERNAME login
-            - npm install --global force-dev-tool
-            - force-dev-tool remote add staging $SF_USERNAME $SF_PASSWORD $SF_LOGIN_URL
-            - force-dev-tool deploy -c -t -d config/deployments/feature-merge staging
-
 
     master:
       - step:
           name: Show files to Deploy
           script:
-            - echo Deploy to UAT
+            - echo Deploy to Staging environment
             - git diff HEAD~1 HEAD --no-renames --name-only
-
       - step:
-          name: Create Package
+          name: Create Package and Deploy
+          deployment: production
           caches:
             - node-global
           script:
             - echo Creating salesforce package
             - npm install --global force-dev-tool
+            - force-dev-tool remote add production $SF_USERNAME $SF_PASSWORD $SF_LOGIN_URL
             - git diff HEAD~1 HEAD --no-renames | force-dev-tool changeset create feature-merge -f
+            - echo Deploying to salesforce
+            - force-dev-tool deploy -t -d config/deployments/feature-merge production
           artifacts:
             - config/deployments/feature-merge
-      - step:
-          caches:
-            - node-global
-          name: Deploy to test
-          deployment: production
-          #trigger: manual
-          script:
-            - expr $SF_USERNAME
-            - echo Deploy to production
-            - npm install --global force-dev-tool
-            - force-dev-tool remote add production $SF_USERNAME $SF_PASSWORD $SF_LOGIN_URL
-            - force-dev-tool deploy -c -t -d config/deployments/feature-merge production
+
 definitions:
   caches:
     node-global: /usr/local/lib/node_modules

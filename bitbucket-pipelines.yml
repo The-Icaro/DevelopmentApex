@@ -1,4 +1,4 @@
-# set SF_USERNAME, SF_PASSWORD and $SF_LOGIN_URL as environment variables
+# set COMMIT SF_USERNAME, SF_PASSWORD and $SF_LOGIN_URL as environment variables
 
 image: node:10.15.0
 pipelines:
@@ -8,7 +8,7 @@ pipelines:
           name: Show files to Deploy
           script:
             - echo Deploy to UAT
-            - git diff HEAD~1 HEAD --no-renames --name-only
+            - git diff HEAD~$COMMIT HEAD --no-renames --name-only
       - step:
           name: Create Package and Deploy
           deployment: test
@@ -18,7 +18,7 @@ pipelines:
             - echo Creating salesforce package
             - npm install --global force-dev-tool
             - force-dev-tool remote add test $SF_USERNAME $SF_PASSWORD $SF_LOGIN_URL
-            - git diff HEAD~1 HEAD --no-renames | force-dev-tool changeset create feature-merge -f
+            - git diff HEAD~$COMMIT HEAD --no-renames | force-dev-tool changeset create feature-merge -f
             - echo Deploying to salesforce
             - force-dev-tool deploy -t -d config/deployments/feature-merge test
           artifacts:
@@ -29,7 +29,7 @@ pipelines:
           name: Show files to Deploy
           script:
             - echo Deploy to Staging environment
-            - git diff HEAD~1 HEAD --no-renames --name-only
+            - git diff HEAD~$COMMIT HEAD --no-renames --name-only
       - step:
           name: Create Package and Deploy
           deployment: staging
@@ -39,7 +39,7 @@ pipelines:
             - echo Creating salesforce package
             - npm install --global force-dev-tool
             - force-dev-tool remote add staging $SF_USERNAME $SF_PASSWORD $SF_LOGIN_URL
-            - git diff HEAD~1 HEAD --no-renames | force-dev-tool changeset create feature-merge -f
+            - git diff HEAD~$COMMIT HEAD --no-renames | force-dev-tool changeset create feature-merge -f
             - echo Deploying to salesforce
             - force-dev-tool deploy -t -d config/deployments/feature-merge staging
           artifacts:
@@ -50,7 +50,7 @@ pipelines:
           name: Show files to Deploy
           script:
             - echo Deploy to Staging environment
-            - git diff HEAD~1 HEAD --no-renames --name-only
+            - git diff HEAD~$COMMIT HEAD --no-renames --name-only
       - step:
           name: Create Package and Deploy
           deployment: production
@@ -60,7 +60,7 @@ pipelines:
             - echo Creating salesforce package
             - npm install --global force-dev-tool
             - force-dev-tool remote add production $SF_USERNAME $SF_PASSWORD $SF_LOGIN_URL
-            - git diff HEAD~1 HEAD --no-renames | force-dev-tool changeset create feature-merge -f
+            - git diff HEAD~$COMMIT HEAD --no-renames | force-dev-tool changeset create feature-merge -f
             - echo Deploying to salesforce
             - force-dev-tool deploy -t -d config/deployments/feature-merge production
           artifacts:

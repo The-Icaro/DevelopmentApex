@@ -26,23 +26,26 @@ Em cada ambiente deverá ser reconfigurado as variáveis
 **TEST**
 
 Variable  | Value |  
---|---|--
- SF_USERNAME |   
- SF_PASSWORD |   
+:--------------|:----------------------------
+ COMMIT       | 1
+ SF_USERNAME  | ci.user@topi.io.<sandboxname>   
+ SF_PASSWORD  | <password><token>  
  SF_LOGIN_URL | https://test.salesforce.com   
 
 **Stage**
 
  Variable      | Value                       
 :--------------|:----------------------------
- SF_USERNAME   |                             
- SF_PASSWORD   |                             
+ COMMIT        | 1
+ SF_USERNAME   | ci.user@topi.io.<sandboxname>                            
+ SF_PASSWORD   | <password><token>                             
  $SF_LOGIN_URL | https://test.salesforce.com
 
 **Production**
 
 Variable      | Value                       
 :--------------|:----------------------------
-SF_USERNAME   |                             
-SF_PASSWORD   |                             
+ COMMIT       | 1
+SF_USERNAME   | ci.user@topi.io.<sandboxname>                           
+SF_PASSWORD   | <password><token>                             
 $SF_LOGIN_URL | https://login.salesforce.com

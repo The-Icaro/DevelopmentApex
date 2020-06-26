@@ -1,71 +1,118 @@
 # set SF_USERNAME, SF_PASSWORD and $SF_LOGIN_URL as environment variables
 
-image: node:10.15.0
 pipelines:
+
+  custom:
+
+    pmd:
+      - step:
+          name: Run PMD Report
+          image: openjdk:8
+          script:
+            - echo Run Code quality Report
+            - echo $HOME
+            - ls -l
+            - wget https://github.com/pmd/pmd/releases/download/pmd_releases%2F6.24.0/pmd-bin-6.24.0.zip
+            - unzip pmd-bin-6.24.0.zip
+            - ls -l
+            - alias pmd="pmd-bin-6.24.0/bin/run.sh pmd"
+            - pmd -d "src" -f csv -R "apex-rules.xml" -reportfile pmd-issues.csv -cache pmd-cache
+          artifacts:
+            - pmd-issues.csv 
+
+    run-all-tests:
+      - step:
+        name: Run All tests
+        image: node:10.15.0
+        script:
+          - echo Run All tests
+          - npm install --global force-dev-tool
+          - force-dev-tool remote add feature $SF_USERNAME $SF_PASSWORD $SF_LOGIN_URL
+          - force-dev-tool test
+
   branches:
+
+    feature:
+      - step:
+          name: Run all tests
+          image: node:10.15.0
+          deployment: dev
+          trigger: manual
+          caches:
+            - node-global
+          script:
+            - echo Run All tests
+            - npm install --global force-dev-tool
+            - force-dev-tool remote add feature $SF_USERNAME $SF_PASSWORD $SF_LOGIN_URL
+            - force-dev-tool test
+            
     develop:
       - step:
-          name: Show files to Deploy
-          script:
-            - echo Deploy to UAT
-            - git diff HEAD~1 HEAD --no-renames --name-only
-      - step:
           name: Create Package and Deploy
+          image: node:10.15.0
           deployment: test
           caches:
             - node-global
           script:
+            - echo Deploy to QA
+            - git diff HEAD~$COMMIT HEAD --no-renames --name-only
             - echo Creating salesforce package
             - npm install --global force-dev-tool
             - force-dev-tool remote add test $SF_USERNAME $SF_PASSWORD $SF_LOGIN_URL
-            - git diff HEAD~1 HEAD --no-renames | force-dev-tool changeset create feature-merge -f
+            - git diff HEAD~$COMMIT HEAD --no-renames | force-dev-tool changeset create feature-merge -f
             - echo Deploying to salesforce
             - force-dev-tool deploy -t -d config/deployments/feature-merge test
           artifacts:
-            - config/deployments/feature-merge
+            - config/deployments/feature-merge/**
 
     release:
       - step:
-          name: Show files to Deploy
+          name: Show files to Deploy in Staging environment
           script:
             - echo Deploy to Staging environment
-            - git diff HEAD~1 HEAD --no-renames --name-only
+            - git diff HEAD~$COMMITS HEAD --no-renames --name-only
       - step:
-          name: Create Package and Deploy
-          deployment: staging
+          name: Deploy to staging
+          image: node:10.15.0
           caches:
             - node-global
+          deployment: staging
+          trigger: manual
           script:
+            - echo Deploy to Staging environment
+            - git diff HEAD~$COMMIT HEAD --no-renames --name-only
             - echo Creating salesforce package
             - npm install --global force-dev-tool
             - force-dev-tool remote add staging $SF_USERNAME $SF_PASSWORD $SF_LOGIN_URL
-            - git diff HEAD~1 HEAD --no-renames | force-dev-tool changeset create feature-merge -f
+            - git diff HEAD~$COMMIT HEAD --no-renames | force-dev-tool changeset create feature-merge -f
             - echo Deploying to salesforce
+            - ls -l
             - force-dev-tool deploy -t -d config/deployments/feature-merge staging
           artifacts:
-            - config/deployments/feature-merge
+            - config/deployments/feature-merge/**
 
     master:
       - step:
-          name: Show files to Deploy
+          name: Show files to Deploy in Production
           script:
             - echo Deploy to Staging environment
-            - git diff HEAD~1 HEAD --no-renames --name-only
+            - git diff HEAD~$COMMITS HEAD --no-renames --name-only
       - step:
-          name: Create Package and Deploy
-          deployment: production
+          name: Deploy to PRODUCTION
+          image: node:10.15.0
           caches:
             - node-global
+          deployment: production
+          trigger: manual
           script:
+            - echo Deploy to PRODUCTION environment
+            - git diff HEAD~$COMMIT HEAD --no-renames --name-only
             - echo Creating salesforce package
             - npm install --global force-dev-tool
             - force-dev-tool remote add production $SF_USERNAME $SF_PASSWORD $SF_LOGIN_URL
-            - git diff HEAD~1 HEAD --no-renames | force-dev-tool changeset create feature-merge -f
+            - git diff HEAD~$COMMIT HEAD --no-renames | force-dev-tool changeset create feature-merge -f
             - echo Deploying to salesforce
             - force-dev-tool deploy -t -d config/deployments/feature-merge production
-          artifacts:
-            - config/deployments/feature-merge
-
 definitions:
   caches:
     node-global: /usr/local/lib/node_modules

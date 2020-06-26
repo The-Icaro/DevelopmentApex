@@ -33,3 +33,4 @@
 *.css text=auto eol=lf
 *.evt text=auto eol=lf
 *.svg text=auto eol=lf
+*.json text=auto eol=lf

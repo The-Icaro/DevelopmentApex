@@ -12,10 +12,10 @@ pipelines:
             - echo Run Code quality Report
             - echo $HOME
             - ls -l
-            - wget https://github.com/pmd/pmd/releases/download/pmd_releases%2F6.24.0/pmd-bin-6.24.0.zip
-            - unzip pmd-bin-6.24.0.zip
+            - wget https://github.com/pmd/pmd/releases/download/pmd_releases%2F6.25.0/pmd-bin-6.25.0.zip
+            - unzip pmd-bin-6.25.0.zip
             - ls -l
-            - alias pmd="pmd-bin-6.24.0/bin/run.sh pmd"
+            - alias pmd="pmd-bin-6.25.0/bin/run.sh pmd"
             - pmd -d "src" -f csv -R "apex-rules.xml" -reportfile pmd-issues.csv -cache pmd-cache
           artifacts:
             - pmd-issues.csv 

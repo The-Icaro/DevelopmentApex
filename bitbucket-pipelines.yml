@@ -12,10 +12,10 @@ pipelines:
             - echo Run Code quality Report
             - echo $HOME
             - ls -l
-            - wget https://github.com/pmd/pmd/releases/download/pmd_releases%2F6.25.0/pmd-bin-6.25.0.zip
-            - unzip pmd-bin-6.25.0.zip
+            - wget https://github.com/pmd/pmd/releases/download/pmd_releases%2F6.26.0/pmd-bin-6.26.0.zip
+            - unzip pmd-bin-6.26.0.zip
             - ls -l
-            - alias pmd="pmd-bin-6.25.0/bin/run.sh pmd"
+            - alias pmd="pmd-bin-6.26.0/bin/run.sh pmd"
             - pmd -d "src" -f csv -R "apex-rules.xml" -reportfile pmd-issues.csv -cache pmd-cache
           artifacts:
             - pmd-issues.csv 
@@ -113,6 +113,8 @@ pipelines:
             - git diff HEAD~$COMMIT HEAD --no-renames | force-dev-tool changeset create feature-merge -f
             - echo Deploying to salesforce
             - force-dev-tool deploy -t -d config/deployments/feature-merge production
+          artifacts:
+            - config/deployments/feature-merge/**
 definitions:
   caches:
     node-global: /usr/local/lib/node_modules

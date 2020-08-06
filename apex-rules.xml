@@ -3,16 +3,11 @@
 
     <description>Topi Rules</description>
 
-    <rule ref="category/apex/bestpractices.xml">
-        <exclude name="ApexAssertionsShouldIncludeMessage" />
-        <exclude name="DebugsShouldUseLoggingLevel" />
-    </rule>
-
-    <rule ref="category/apex/errorprone.xml">
-        <exclude name="EmptyStatementBlock" />
-    </rule>
-
     <rule ref="category/apex/design.xml/CyclomaticComplexity">
+        <priority>1</priority>
+    </rule>
+
+    <rule ref="category/apex/design.xml/CognitiveComplexity">
         <priority>1</priority>
     </rule>
 
@@ -20,11 +15,74 @@
         <priority>1</priority>
     </rule>
 
+    <rule ref="category/apex/design.xml/NcssMethodCount">
+        <priority>1</priority>
+    </rule>
+
+    <rule ref="category/apex/design.xml/NcssConstructorCount">
+        <priority>1</priority>
+    </rule>
+
+    <rule ref="category/apex/design.xml/NcssTypeCount">
+        <priority>1</priority>
+    </rule>
+
     <rule ref="category/apex/design.xml/ExcessiveClassLength">
-        <priority>2</priority>
+        <priority>1</priority>
         <properties>
-            <property name="minimum" value="500.0" />
+            <property name="minimum" value="400.0" />
         </properties>
+    </rule>
+
+    <rule ref="category/apex/codestyle.xml/FieldDeclarationsShouldBeAtStart">
+        <priority>3</priority>
+    </rule>
+    <rule ref="category/apex/codestyle.xml/FieldNamingConventions">
+        <priority>3</priority>
+    </rule>
+    <rule ref="category/apex/codestyle.xml/LocalVariableNamingConventions">
+        <priority>3</priority>
+    </rule>
+    <rule ref="category/apex/codestyle.xml/MethodNamingConventions">
+        <priority>3</priority>
+    </rule>
+    <rule ref="category/apex/codestyle.xml/PropertyNamingConventions">
+        <priority>3</priority>
+    </rule>
+
+    <rule ref="category/apex/bestpractices.xml/ApexUnitTestClassShouldHaveAsserts">
+        <priority>2</priority>
+    </rule>
+
+    <rule ref="category/apex/bestpractices.xml/ApexUnitTestMethodShouldHaveIsTestAnnotation">
+        <priority>2</priority>
+    </rule>
+
+    <rule ref="category/apex/bestpractices.xml/ApexUnitTestShouldNotUseSeeAllDataTrue">
+        <priority>2</priority>
+    </rule>
+
+    <rule ref="category/apex/bestpractices.xml/AvoidLogicInTrigger">
+        <priority>2</priority>
+    </rule>
+
+
+    <rule ref="category/apex/performance.xml/AvoidDmlStatementsInLoops">
+        <priority>2</priority>
+    </rule>
+
+    <rule ref="category/apex/performance.xml/AvoidSoslInLoops">
+        <priority>2</priority>
+    </rule>
+
+
+    <rule ref="category/apex/bestpractices.xml">
+        <exclude name="ApexAssertionsShouldIncludeMessage" />
+        <exclude name="DebugsShouldUseLoggingLevel" />
+    </rule>
+
+    <rule ref="category/apex/errorprone.xml">
+        <exclude name="EmptyStatementBlock" />
     </rule>
 
     <!-- Using whole set of rules excluding some -->
@@ -120,10 +178,7 @@
     </rule>
 
 
-    <rule name="EmptyStatementBlock" language="apex" since="6.0.0" message="Avoid empty block statements." 
-        
-        class="net.sourceforge.pmd.lang.apex.rule.ApexXPathRule" 
-        externalInfoUrl="${pmd.website.baseurl}/pmd_rules_apex_errorprone.html#emptystatementblock">
+    <rule name="EmptyStatementBlock" language="apex" since="6.0.0" message="Avoid empty block statements." class="net.sourceforge.pmd.lang.apex.rule.ApexXPathRule" externalInfoUrl="${pmd.website.baseurl}/pmd_rules_apex_errorprone.html#emptystatementblock">
         <description>
                 Empty block statements serve no purpose and should be removed.
         </description>

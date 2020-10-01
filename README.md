@@ -45,6 +45,7 @@ e caso encontre algum problema devo exibir no campo a mensagem "Inválido"
 **Quando** incluo ou modifico a mesma
 
 **Então** deverá ser formatado os campos abaixo de acordo com o exemplo correspondente
+
 * CPF (Cpf__c) :  Exemplo - "365.305.250-50"
 * CNPJ (Cnpj__c) :  Exemplo - "24.661.643/0001-44"
 * CEP de cobrança (BillingPostalCode) :  Exemplo - "16310-970"
@@ -100,3 +101,57 @@ conforme o mapeamento *Send Account Address Mapping*.
 **Então** devo completar os dados da conta conforme mapeamento *Get Account Geolocation Address Info Mapping*.
 
 
+#### Mapeamento do Serviço : Send Account Address Mapping
+
+Todo Serviço exposto deverá utilizar o OAuth 2.0 como mecanismo de autenticação (ver "OAuth Service Mapping")
+
+* Url : https://bisso-topirun-20-dev-ed.my.salesforce.com/services/apexrest/api/account/geolocation
+* Metodo : PUT
+* Header : 'Autorization' => 'Bearer ' + <access_token> ( Este deverá ser obtido pela integração de OAuth )
+  
+#### Mapeamento de Campos
+----
+
+
+#### Request
+-----
+
+| Origem | Destino | Obrigatório | Tipo
+|:---|:---|:--:|:---|
+| Account.Name | name | x | String (80)
+| Account.Id             | externalId | x | String (20)
+| Account.BillingStreet | billingAddress.street | x | String (255) 
+| Account.BillingCity | billingAddress.city |  | String (255) 
+| Account.BillingPostalCode | billingAddress.zipCode | x | String (15) 
+| Account.BillingState | billingAddress.state |  | String (80) 
+| Account.BillingCountry | billingAddress.country |  | String (80) 
+| Account.ShippingStreet | shippingAddress.street | x | String (255) 
+| Account.ShippingCity | shippingAddress.city |  | String (255) 
+| Account.ShippingPostalCode | shippingAddress.zipCode | x | String (15) 
+| Account.ShippingState | shippingAddress.state |  | String (80) 
+| Account.ShippingCountry | shippingAddress.country |  | String (80)
+
+#### Exemplo de Payload 
+
+``` javascript
+
+{
+    "name": "Teste do Bisso",
+    "externalId": "23423423432423",
+    "billingAddress" : {
+        "street": "Rua Pedro Dias Batista 70",
+        "city": "Águas de Santa Bárbara",
+        "zipCode": "18770-970",
+        "state": "SP",
+        "country": "Brasil"
+    },
+    "shippingAddress" : {
+        "street": "Rua Coronel Honório Palma 135",
+        "city": "Altinópolis",
+        "zipCode": "14350-970",
+        "state": "SP",
+        "country": "Brasil"
+    }
+}
+
+```  

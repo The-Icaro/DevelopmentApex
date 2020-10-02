@@ -390,6 +390,6 @@ Este serviço deverá ser executado utilizando mecanismo de agendamento (*Schedu
 ---
 
 
-> # *"Sarifícios temporários trazem recompensas permanentes"*
+> # *"Sacrifícios temporários trazem recompensas permanentes"*
 >
 > ## *Boa Sorte !!!*

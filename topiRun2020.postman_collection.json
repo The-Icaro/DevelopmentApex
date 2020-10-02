@@ -1,0 +1,232 @@
+{
+	"info": {
+		"_postman_id": "ca672597-e0f9-4c5b-9acc-15327e31f109",
+		"name": "TopiRun2020",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SalesForce OAuth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9dec18e4-9a00-4785-964d-4ab6392e2b3d",
+						"exec": [
+							"pm.test(\"Success Auth\", function () {",
+							"    var response = pm.response.json();",
+							"    pm.environment.set(\"oauth-token\", response.access_token);",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "3MVG9l2zHsylwlpS6h2vTmlmUGQBhdenOwDRCOFn28Edf9ajwCJ3THJs1OvxrZPVNucENmEJb.7paFUCK3Kqr",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "BFC7A19775AA64B697A6F712F62E2D0A671321BBA2FAE18973580F4557F5FC68",
+							"type": "text"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://localhost",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "integration.user@topirun.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "@TopiRun2020",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://login.salesforce.com/services/oauth2/token",
+					"protocol": "https",
+					"host": [
+						"login",
+						"salesforce",
+						"com"
+					],
+					"path": [
+						"services",
+						"oauth2",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate Geolocation Address",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "00D4W0000048AiQ!AQoAQOn.CT3.CDWM8Icplg94SzXQ1iiWlDurPbBD.p0qyBmKEg4X1GJDHIJE.mb1jxb6ZxXU4Fu8squ6sKbc5IRl0dL62ASu",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Teste do Bisso\",\n    \"externalId\": \"23423423432423\",\n    \"billingAddress\" : {\n        \"street\": \"Rua Pedro Dias Batista 70\",\n        \"city\": \"Águas de Santa Bárbara\",\n        \"zipCode\": \"18770-970\",\n        \"state\": \"SP\",\n        \"country\": \"Brasil\"\n    },\n    \n    \"shippingAddress\" : {\n        \"street\": \"Rua Coronel Honório Palma 135\",\n        \"city\": \"Altinópolis\",\n        \"zipCode\": \"14350-970\",\n        \"state\": \"SP\",\n        \"country\": \"Brasil\"\n    }\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://bisso-topirun-20-dev-ed.my.salesforce.com/services/apexrest/api/account/geolocation",
+					"protocol": "https",
+					"host": [
+						"bisso-topirun-20-dev-ed",
+						"my",
+						"salesforce",
+						"com"
+					],
+					"path": [
+						"services",
+						"apexrest",
+						"api",
+						"account",
+						"geolocation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate Geolocation Address With Error",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "00D4W0000048AiQ!AQoAQOn.CT3.CDWM8Icplg94SzXQ1iiWlDurPbBD.p0qyBmKEg4X1GJDHIJE.mb1jxb6ZxXU4Fu8squ6sKbc5IRl0dL62ASu",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"billingAddress\" : {\n        \"street\": \"Rua Pedro Dias Batista 70\",\n        \"city\": \"Águas de Santa Bárbara\",\n        \"zipCode\": \"18770-970\",\n        \"state\": \"SP\",\n        \"country\": \"Brasil\"\n    },\n    \n    \"shippingAddress\" : {\n        \"street\": \"Rua Coronel Honório Palma 135\",\n        \"city\": \"Altinópolis\",\n        \"zipCode\": \"14350-970\",\n        \"state\": \"SP\",\n        \"country\": \"Brasil\"\n    }\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://bisso-topirun-20-dev-ed.my.salesforce.com/services/apexrest/api/account/geolocation",
+					"protocol": "https",
+					"host": [
+						"bisso-topirun-20-dev-ed",
+						"my",
+						"salesforce",
+						"com"
+					],
+					"path": [
+						"services",
+						"apexrest",
+						"api",
+						"account",
+						"geolocation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Geolocation Addresses",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "00D4W0000048AiQ!AQoAQOn.CT3.CDWM8Icplg94SzXQ1iiWlDurPbBD.p0qyBmKEg4X1GJDHIJE.mb1jxb6ZxXU4Fu8squ6sKbc5IRl0dL62ASu",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"externalIds\": [\n        \"5567655675676\",\n        \"3123212132\",\n        \"3232365654633\"\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://bisso-topirun-20-dev-ed.my.salesforce.com/services/apexrest/api/account/geolocation",
+					"protocol": "https",
+					"host": [
+						"bisso-topirun-20-dev-ed",
+						"my",
+						"salesforce",
+						"com"
+					],
+					"path": [
+						"services",
+						"apexrest",
+						"api",
+						"account",
+						"geolocation"
+					],
+					"query": [
+						{
+							"key": "externalId",
+							"value": "32112312",
+							"disabled": true
+						},
+						{
+							"key": "externalId",
+							"value": "35333535353",
+							"disabled": true
+						},
+						{
+							"key": "externalId",
+							"value": "23099239239",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

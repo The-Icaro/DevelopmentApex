@@ -381,3 +381,11 @@ Este serviço deverá ser executado utilizando mecanismo de agendamento (*Schedu
 * CodeStyle (Java Code Style)
 * Padrões aplicados
 * Violações do PMD
+
+
+---
+
+
+> # *"Sarifícios temporários trazem recompensas permanentes"*
+>
+> ## *Boa Sorte !!!*

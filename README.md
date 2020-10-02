@@ -103,9 +103,13 @@ conforme o mapeamento *Send Account Address Mapping*.
 
 
 
+## Detalhamento Técnico
 
+---
 
-#### Mapeamento do Serviço : Send Account Address Mapping
+Importe a [Colletion do  Postman](/topiRun2020.postman_collection.json) para visualizar/testar todos os serviços 
+
+### Mapeamento do Serviço : Send Account Address Mapping
 
 Todo Serviço exposto deverá utilizar o OAuth 2.0 como mecanismo de autenticação (ver "OAuth Service Mapping")
 

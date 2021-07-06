@@ -210,7 +210,7 @@ Caso Contrario
 |redirect_uri|http://localhost|
 |grant_type|password|
 |username|integration.user@topirun.com|
-|password|@@TopiRun20212|
+|password|@TopiRun20212|
 
 
 #### Exemplo de Payload 

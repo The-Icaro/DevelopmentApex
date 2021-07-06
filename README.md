@@ -57,7 +57,7 @@ e caso encontre algum problema devo exibir no campo a mensagem "Inválido"
 ----
 
 | Objeto | Nome do Campo |  Nome de API | Tipo | Tamanho | Obrigatório
-|:---|:---|:---|:---:|:---:|:---:|:---:|
+|:-------|:--------------|:-------------|:----:|:-------:|:---:|
 | Account | CNPJ | Cnpj__c | Texto | 20 | Não |
 | Account | CPF | Cpf__c | Texto | 20 | Não |
 | Account | Geolocalização Solicitada | GeolocationRequested__c | Boolean |  | Não |
@@ -210,7 +210,7 @@ Caso Contrario
 |redirect_uri|http://localhost|
 |grant_type|password|
 |username|integration.user@topirun.com|
-|password|@TopiRun2021|
+|password|@@TopiRun20212|
 
 
 #### Exemplo de Payload 

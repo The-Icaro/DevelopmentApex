@@ -210,20 +210,20 @@ Caso Contrario
 |redirect_uri|http://localhost|
 |grant_type|password|
 |username|integration.user@topirun.com|
-|password|@TopiRun20212|
+|password|@TopiRun20213|
 
 
 #### Exemplo de Payload 
 
 
 ``` javascript
-
+ 
 client_id:3MVG9l2zHsylwlpS6h2vTmlmUGQBhdenOwDRCOFn28Edf9ajwCJ3THJs1OvxrZPVNucENmEJb.7paFUCK3Kqr&
 client_secret:BFC7A19775AA64B697A6F712F62E2D0A671321BBA2FAE18973580F4557F5FC68&
 redirect_uri:http://localhost&
 grant_type:password&
 username:integration.user@topirun.com&
-password:@@TopiRun20213
+password:@TopiRun20213
 
 ```  
 

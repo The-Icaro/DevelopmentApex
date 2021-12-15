@@ -13,18 +13,17 @@ public class AccountEnrichEvent {
 
     public List<Event> enrich(List<Account> accounts) {
 
-        List<Event> events = new List<Event>{};
+        List<Event> events = new List<Event>();
 
         for (Account account : accounts) {
-           List<Event> event = withCreatingEvent(account);
-           events.add(event.get(0));
+           events.add(buildEvent(account));
         }
 
-        return events;
+        return repository.save(events);
 
     }
 
-    public List<Event> withCreatingEvent(Account account) {
+    public Event buildEvent(Account account) {
 
         Event event = new Event();
 
@@ -42,7 +41,7 @@ public class AccountEnrichEvent {
         
         event.Subject = 'Apresentação institucional dos produtos Premium';
         
-        return repository.save(event);
+        return event;
 
     }
 

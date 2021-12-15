@@ -5,7 +5,7 @@ public class AccountCategoryFilter {
 
     public List<Account> filterByNotEmptyCategory(List<Account> accounts) {
 
-        List<Account> filteredAccountsWithCategory = new List<Account>{};
+        List<Account> filteredAccountsWithCategory = new List<Account>();
 
         for (Account account : accounts) {
 
@@ -20,7 +20,7 @@ public class AccountCategoryFilter {
 
     public List<Account> filterByPremiumAccountCategory(List<Account> accounts) {
 
-        List<Account> filteredPremiumAccounts = new List<Account>{};
+        List<Account> filteredPremiumAccounts = new List<Account>();
 
         for (Account account : filterByNotEmptyCategory(accounts)) {
 
@@ -36,7 +36,7 @@ public class AccountCategoryFilter {
 
     public List<Account> filterByAnnualRevenueForPremiumAccounts(List<Account> accounts, Decimal revenue) {
 
-        List<Account> filteredPremiumAccounts = new List<Account>{};
+        List<Account> filteredPremiumAccounts = new List<Account>();
 
         for (Account account : filterByPremiumAccountCategory(accounts)) {
 

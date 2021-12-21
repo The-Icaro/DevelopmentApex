@@ -1,40 +1,40 @@
-IlluminatedCloud/
-.idea
+# This file is used for Git repositories to specify intentionally untracked files that Git should ignore. 
+# If you are not using git, you can delete this file. For more information see: https://git-scm.com/docs/gitignore
+# For useful gitignore templates see: https://github.com/github/gitignore
 
-src/applications
-src/appMenus
-src/email
-src/groups
-src/homePageComponents
-src/homePageLayouts
-src/labels
-src/objects
-src/permissionsets
-src/profiles
-src/quickActions
-src/remoteSiteSettings
-src/reports
-src/reportTypes
-src/roles
-src/settings
-src/sharingRules
-src/tabs
-src/workflows
-src/documents
-config/
-*.sublime-project
-*.sublime-workspace
-debug/
-*.iml
-#*.yml
-force.json
-#package.xml
-build.properties
-.vim-force.com/
-\.vscode/
+# Salesforce cache
+.sf/
+.sfdx/
+.localdevserver/
+deploy-options.json
 
-sfdx-project\.json
+# LWC VSCode autocomplete
+**/lwc/jsconfig.json
 
-\.sfdx
+# LWC Jest coverage reports
+coverage/
 
-\.forceCode
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+node_modules/
+
+# Eslint cache
+.eslintcache
+
+# MacOS system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# Local environment variables
+.env

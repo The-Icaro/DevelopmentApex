@@ -1,7 +1,7 @@
 /**
  * @author Icaro - TOPi
  */
-public class ExternalSystemGeolocationRequest { 
+public class ExternalSystemGeoMappingRequest { 
     
     public String name;
     

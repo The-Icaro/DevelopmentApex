@@ -1,7 +1,7 @@
 /**
  * @author Icaro - TOPi
  */
-public class ExternalSystemGeolocationResponse {
+public class ExternalSystemGeoMappingResponse {
     
     public Integer statusCode;
 

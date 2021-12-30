@@ -1,7 +1,7 @@
 /**
  * @author Icaro - TOPi
  */
-public class ExternalSystemGeolocationRequestBuilder {
+public class ExternalSystemGeoMappingRequestBuilder {
 
     public HttpRequest build(Account account, String accessToken) {
 
@@ -21,7 +21,7 @@ public class ExternalSystemGeolocationRequestBuilder {
 
     public ExternalSystemAddressRequest buildAddress(Account account, AccountFilterPostalCodeTypes type) {
         
-        ExternalSystemGeolocationRequest requestBody = new ExternalSystemGeolocationRequest();
+        ExternalSystemGeoMappingRequest requestBody = new ExternalSystemGeoMappingRequest();
 
         ExternalSystemAddressRequest requestAddress;
 
@@ -51,9 +51,9 @@ public class ExternalSystemGeolocationRequestBuilder {
 
     }
 
-    public ExternalSystemGeolocationRequest buildBodyRequest(Account account) {
+    public ExternalSystemGeoMappingRequest buildBodyRequest(Account account) {
 
-        ExternalSystemGeolocationRequest requestBody = new ExternalSystemGeolocationRequest();
+        ExternalSystemGeoMappingRequest requestBody = new ExternalSystemGeoMappingRequest();
 
         requestBody.name = account.Name;
 
